@@ -1,101 +1,164 @@
 const movieData = {
-    "October 2024": [
-      {
-        title: "Oppenheimer",
-        poster: "https://path-to-poster/oppenheimer.jpg",
-        rating: 4.5,
-        letterboxdUrl: "https://letterboxd.com/film/oppenheimer/"
-      },
-      {
-        title: "Dune: Part Two",
-        poster: "https://image.tmdb.org/t/p/w500/8b8R8l88Qje9dn9OE8PY05Nxl1X.jpg",
-        rating: 4.5,
-        letterboxdUrl: "https://letterboxd.com/film/dune-part-two/"
-      },
-      {
-        title: "Poor Things",
-        poster: "https://image.tmdb.org/t/p/w500/kCGlIMHnOm8JPXq3rXM6c5wMxcT.jpg",
-        rating: 4.0,
-        letterboxdUrl: "https://letterboxd.com/film/poor-things/"
-      },
-      {
-        title: "Civil War",
-        poster: "https://image.tmdb.org/t/p/w500/7vHNaIGL2S7xkJ3BEEJHMvqHSMO.jpg",
-        rating: 4.0,
-        letterboxdUrl: "https://letterboxd.com/film/civil-war-2024/"
-      },
-      {
-        title: "Godzilla x Kong",
-        poster: "https://image.tmdb.org/t/p/w500/aZvOkdo203bm1kpcY0A0Tn074ER.jpg",
-        rating: 3.5,
-        letterboxdUrl: "https://letterboxd.com/film/godzilla-x-kong-the-new-empire/"
-      },
-      {
-        title: "Drive-Away Dolls",
-        poster: "https://image.tmdb.org/t/p/w500/gavGnAMTXPkpoFgG0stwgIgKb64.jpg",
-        rating: 3.0,
-        letterboxdUrl: "https://letterboxd.com/film/drive-away-dolls/"
-      },
-    ]
-  };
-
-  function displayMoviePosters() {
-    const reelContainer = document.querySelector('.reel-container');
-    const movies = movieData["October 2024"];
-    
-    movies.forEach((movie, index) => {
-        const posterElement = document.createElement('img');
-        posterElement.classList.add('movie-poster');
-        posterElement.src = movie.poster;
-        posterElement.alt = movie.title;
-        posterElement.title = movie.title;
-        
-        posterElement.addEventListener('click', () => {
-            window.open(movie.letterboxdUrl, '_blank');
-        });
-
-        reelContainer.appendChild(posterElement);
-    });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Display movies
-    displayMoviePosters();
-    
-    // Make page scrollable
-    document.body.style.height = '200vh';
-    
-    const sections = document.querySelectorAll('.landing, .content');
-    let isScrolling;
-    
-    window.addEventListener('scroll', () => {
-        // Clear the timeout
-        window.clearTimeout(isScrolling);
-        
-        // Add scrolled class based on threshold
-        if (window.scrollY > window.innerHeight * 0.9) {
-            document.body.classList.add('scrolled');
-        } else {
-            document.body.classList.remove('scrolled');
+    "September 2024": [
+        {
+            title: "American Gangster",
+            poster: "assets/posters/american-gangster.jpg",
+            rating: 4.5,
+            letterboxdUrl: "https://letterboxd.com/film/american-gangster/"
+        },
+        {
+            title: "Steve Jobs",
+            poster: "assets/posters/steve-jobs.jpg",
+            rating: 4.0,
+            letterboxdUrl: "https://letterboxd.com/film/steve-jobs/"
+        },
+        {
+            title: "Bram Stoker's Dracula",
+            poster: "assets/posters/dracula.jpg",
+            rating: 3.0,
+            letterboxdUrl: "https://letterboxd.com/film/bram-stokers-dracula/"
+        },
+        {
+            title: "Anatomy of a Fall",
+            poster: "assets/posters/anatomy.jpg",
+            rating: 4.0,
+            letterboxdUrl: "https://letterboxd.com/film/anatomy-of-a-fall/"
+        },
+        {
+            title: "The Fly",
+            poster: "assets/posters/the-fly.jpg",
+            rating: 4.5,
+            letterboxdUrl: "https://letterboxd.com/film/the-fly-1986/"
+        },
+        {
+            title: "Watcher",
+            poster: "assets/posters/watcher.jpg",
+            rating: 4,
+            letterboxdUrl: "hhttps://letterboxd.com/film/watcher/"
         }
+    ],
+        "October 2024": [
+        {
+            title: "The Wicker Man",
+            poster: "assets/posters/wicker-man.jpg",
+            rating: 4.5,
+            letterboxdUrl: "https://letterboxd.com/film/the-wicker-man-2006/"
+        },
+        {
+            title: "Inside",
+            poster: "assets/posters/inside.jpg",
+            rating: 4.5,
+            letterboxdUrl: "https://letterboxd.com/film/inside-2023/"
+        },
+        {
+            title: "The Fall Guy",
+            poster: "assets/posters/fall-guy.jpg",
+            rating: 4.0,
+            letterboxdUrl: "https://letterboxd.com/film/the-fall-guy-2024/"
+        },
+        {
+            title: "Roadrunner",
+            poster: "assets/posters/roadrunner.jpg",
+            rating: 4.0,
+            letterboxdUrl: "https://letterboxd.com/film/roadrunner-a-film-about-anthony-bourdain/"
+        },
+        {
+            title: "Longlegs",
+            poster: "assets/posters/longlegs.jpg",
+            rating: 3.5,
+            letterboxdUrl: "https://letterboxd.com/film/longlegs/"
+        },
+        {
+            title: "Trap",
+            poster: "assets/posters/trap.jpg",
+            rating: 3.0,
+            letterboxdUrl: "https://letterboxd.com/film/trap-2024/"
+        },
+        ]
+    };
+
+    function displayMoviePosters() {
+      // Display October movies first
+      const octoberContainer = document.querySelector('#october-reel');
+      const octoberMovies = movieData["October 2024"];
+  
+      octoberMovies.forEach((movie, index) => {
+          const posterElement = document.createElement('img');
+          posterElement.classList.add('movie-poster');
+          posterElement.src = movie.poster;
+          posterElement.alt = movie.title;
+          posterElement.title = movie.title;
+          
+          posterElement.addEventListener('click', () => {
+              window.open(movie.letterboxdUrl, '_blank');
+          });
+  
+          octoberContainer.appendChild(posterElement);
+      });
+  
+      // Then display September movies
+      const septemberContainer = document.querySelector('#september-reel');
+      const septemberMovies = movieData["September 2024"];
+  
+      septemberMovies.forEach((movie, index) => {
+          const posterElement = document.createElement('img');
+          posterElement.classList.add('movie-poster');
+          posterElement.src = movie.poster;
+          posterElement.alt = movie.title;
+          posterElement.title = movie.title;
+  
+          posterElement.addEventListener('click', () => {
+              window.open(movie.letterboxdUrl, '_blank');
+          });
+          septemberContainer.appendChild(posterElement);
+      });
+  }
+    
+    // DOM Content Loaded event listener
+    document.addEventListener('DOMContentLoaded', () => {
+        window.scrollTo(0, 0);
+        document.body.style.overflow = 'hidden';
         
-        // Set a timeout to run after scrolling ends
-        isScrolling = setTimeout(() => {
-            const currentScroll = window.scrollY;
-            const windowHeight = window.innerHeight;
+        displayMoviePosters();
+        
+        setTimeout(() => {
+            document.body.style.overflow = '';
+            document.body.style.height = '300vh';
             
-            // Determine which section to snap to
-            if (currentScroll > windowHeight * 0.9) {
-                window.scrollTo({
-                    top: windowHeight,
-                    behavior: 'smooth'
-                });
-            } else {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            }
-        }, 80); // Adjust this timeout to change sensitivity
-    });
-});
+            let lastScrollTop = 0;
+            let isScrolling;
+            
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.scrollY;
+                const windowHeight = window.innerHeight;
+                const scrollingUp = currentScroll < lastScrollTop;
+                
+                clearTimeout(isScrolling);
+                
+                // Handle scroll direction and classes
+                if (scrollingUp && currentScroll < windowHeight * 0.3) {
+                    document.body.classList.remove('scrolled');
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                } else if (currentScroll > windowHeight * 0.6) {
+                    document.body.classList.add('scrolled');
+                }
+                
+                // Update last scroll position
+                lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+                
+                // Handle snap points
+                isScrolling = setTimeout(() => {
+                    if (currentScroll > windowHeight * 0.3) {
+                        const sectionIndex = Math.round((currentScroll - windowHeight) / windowHeight) + 1;
+                        window.scrollTo({
+                            top: sectionIndex * windowHeight,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 66);
+            });
+        }, 1000);
+    });    
