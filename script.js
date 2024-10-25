@@ -34,7 +34,7 @@ const movieData = {
             title: "Watcher",
             poster: "assets/posters/watcher.jpg",
             rating: 4,
-            letterboxdUrl: "hhttps://letterboxd.com/film/watcher/"
+            letterboxdUrl: "https://letterboxd.com/film/watcher/"
         }
     ],
         "October 2024": [
@@ -135,3 +135,23 @@ const movieData = {
             lastScrollTop = currentScroll;
         });
     });  
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Add cursor element to body
+        const cursor = document.createElement('div');
+        cursor.classList.add('custom-cursor');
+        document.body.appendChild(cursor);
+    
+        // Update cursor position
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 20 + 'px';
+            cursor.style.top = e.clientY - 20 + 'px';
+        });
+    
+        // Optional: Scale up cursor on poster hover
+        const posters = document.querySelectorAll('.movie-poster');
+        posters.forEach(poster => {
+            poster.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            poster.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+    });
