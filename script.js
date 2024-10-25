@@ -60,3 +60,28 @@ function displayMoviePosters() {
 }
 
 document.addEventListener('DOMContentLoaded', displayMoviePosters);
+
+document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.landing, .content');
+    let currentSection = 0;
+    
+    window.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        
+        if (e.deltaY > 0 && currentSection < sections.length - 1) {
+            currentSection++;
+        } else if (e.deltaY < 0 && currentSection > 0) {
+            currentSection--;
+        }
+        
+        sections[currentSection].scrollIntoView({
+            behavior: 'smooth'
+        });
+        
+        if (currentSection > 0) {
+            document.body.classList.add('scrolled');
+        } else {
+            document.body.classList.remove('scrolled');
+        }
+    }, { passive: false });
+});
