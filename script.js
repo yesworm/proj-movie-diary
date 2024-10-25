@@ -117,48 +117,21 @@ const movieData = {
     // DOM Content Loaded event listener
     document.addEventListener('DOMContentLoaded', () => {
         window.scrollTo(0, 0);
-        document.body.style.overflow = 'hidden';
-        
         displayMoviePosters();
         
-        setTimeout(() => {
-            document.body.style.overflow = '';
-            document.body.style.height = '300vh';
+        let lastScrollTop = 0;
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.scrollY;
+            const windowHeight = window.innerHeight;
             
-            let lastScrollTop = 0;
-            let isScrolling;
+            // Update scrolled class based on scroll position
+            if (currentScroll > windowHeight * 0.3) {
+                document.body.classList.add('scrolled');
+            } else {
+                document.body.classList.remove('scrolled');
+            }
             
-            window.addEventListener('scroll', () => {
-                const currentScroll = window.scrollY;
-                const windowHeight = window.innerHeight;
-                const scrollingUp = currentScroll < lastScrollTop;
-                
-                clearTimeout(isScrolling);
-                
-                // Handle scroll direction and classes
-                if (scrollingUp && currentScroll < windowHeight * 0.3) {
-                    document.body.classList.remove('scrolled');
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                } else if (currentScroll > windowHeight * 0.6) {
-                    document.body.classList.add('scrolled');
-                }
-                
-                // Update last scroll position
-                lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-                
-                // Handle snap points
-                isScrolling = setTimeout(() => {
-                    if (currentScroll > windowHeight * 0.3) {
-                        const sectionIndex = Math.round((currentScroll - windowHeight) / windowHeight) + 1;
-                        window.scrollTo({
-                            top: sectionIndex * windowHeight,
-                            behavior: 'smooth'
-                        });
-                    }
-                }, 66);
-            });
-        }, 1000);
-    });    
+            lastScrollTop = currentScroll;
+        });
+    });  
