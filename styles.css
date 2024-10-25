@@ -6,8 +6,8 @@
 }
 
 .header {
-    font-size: 8rem;
-    font-weight: 300;
+    font-size: 12rem;
+    font-weight: 600;
     letter-spacing: -0.03em;
     text-align: center;
 }
@@ -89,7 +89,7 @@ body.scrolled .container {
     font-weight: 500;
     color: #000;
     text-transform: uppercase;
-    letter-spacing: -0.05em;  /* tight letter spacing */
+    letter-spacing: -0.05em;  /* tight letter spacing - dropped from .03em originally */
     font-family: "Helvetica Neue", sans-serif;
     white-space: nowrap;
 }
@@ -102,11 +102,11 @@ body.scrolled .container {
     text-align: right;
 }
 
-/* reel container to hold our rotating movies */
+/* reel container to hold the rotating movies */
 .reel-container {
     position: relative;
-    width: 850px; 
-    height: 850px;
+    width: 800px; 
+    height: 800px;
     margin: 0 auto;
     flex-shrink: 0;
     scroll-snap-align: center;

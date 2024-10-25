@@ -39,7 +39,7 @@ const movieData = {
     ]
   };
 
-function displayMoviePosters() {
+  function displayMoviePosters() {
     const reelContainer = document.querySelector('.reel-container');
     const movies = movieData["October 2024"];
     
@@ -50,7 +50,6 @@ function displayMoviePosters() {
         posterElement.alt = movie.title;
         posterElement.title = movie.title;
         
-        // Add click event to open Letterboxd
         posterElement.addEventListener('click', () => {
             window.open(movie.letterboxdUrl, '_blank');
         });
@@ -59,29 +58,44 @@ function displayMoviePosters() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', displayMoviePosters);
-
 document.addEventListener('DOMContentLoaded', () => {
-    const sections = document.querySelectorAll('.landing, .content');
-    let currentSection = 0;
+    // Display movies
+    displayMoviePosters();
     
-    window.addEventListener('wheel', (e) => {
-        e.preventDefault();
+    // Make page scrollable
+    document.body.style.height = '200vh';
+    
+    const sections = document.querySelectorAll('.landing, .content');
+    let isScrolling;
+    
+    window.addEventListener('scroll', () => {
+        // Clear the timeout
+        window.clearTimeout(isScrolling);
         
-        if (e.deltaY > 0 && currentSection < sections.length - 1) {
-            currentSection++;
-        } else if (e.deltaY < 0 && currentSection > 0) {
-            currentSection--;
-        }
-        
-        sections[currentSection].scrollIntoView({
-            behavior: 'smooth'
-        });
-        
-        if (currentSection > 0) {
+        // Add scrolled class based on threshold
+        if (window.scrollY > window.innerHeight * 0.9) {
             document.body.classList.add('scrolled');
         } else {
             document.body.classList.remove('scrolled');
         }
-    }, { passive: false });
+        
+        // Set a timeout to run after scrolling ends
+        isScrolling = setTimeout(() => {
+            const currentScroll = window.scrollY;
+            const windowHeight = window.innerHeight;
+            
+            // Determine which section to snap to
+            if (currentScroll > windowHeight * 0.9) {
+                window.scrollTo({
+                    top: windowHeight,
+                    behavior: 'smooth'
+                });
+            } else {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+        }, 80); // Adjust this timeout to change sensitivity
+    });
 });
